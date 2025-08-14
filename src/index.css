@@ -2,41 +2,61 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
-All colors MUST be HSL.
-*/
+/* 8020ads Design System - Professional wit with 80/20 visual metaphors */
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
-
+    /* Core Brand Colors */
+    --background: 0 0% 98%;
+    --foreground: 220 26% 14%;
+    
+    /* Brand Identity */
+    --primary: 220 26% 14%;        /* Deep navy - trust & professionalism */
+    --primary-foreground: 0 0% 98%;
+    
+    --secondary: 33 100% 52%;      /* Warm orange - the important 20% */
+    --secondary-foreground: 220 26% 14%;
+    
+    --accent: 220 13% 91%;         /* Subtle gray for sophistication */
+    --accent-foreground: 220 26% 14%;
+    
+    /* UI Elements */
     --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
-
-    --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
-
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
-
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
-
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
-
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
-
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
-
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
-
-    --radius: 0.5rem;
+    --card-foreground: 220 26% 14%;
+    
+    --muted: 220 13% 91%;
+    --muted-foreground: 220 9% 46%;
+    
+    --border: 220 13% 91%;
+    --input: 220 13% 91%;
+    --ring: 33 100% 52%;
+    
+    /* Interaction States */
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 98%;
+    
+    /* Design System Extensions */
+    --radius: 0.75rem;
+    
+    /* Custom Gradients */
+    --gradient-hero: linear-gradient(135deg, hsl(220 26% 14%) 0%, hsl(220 26% 18%) 100%);
+    --gradient-accent: linear-gradient(135deg, hsl(33 100% 52%) 0%, hsl(33 100% 58%) 100%);
+    --gradient-split: linear-gradient(90deg, hsl(220 26% 14%) 80%, hsl(33 100% 52%) 80%);
+    
+    /* Shadows */
+    --shadow-card: 0 4px 6px -1px hsl(220 26% 14% / 0.1), 0 2px 4px -1px hsl(220 26% 14% / 0.06);
+    --shadow-hero: 0 20px 25px -5px hsl(220 26% 14% / 0.1), 0 10px 10px -5px hsl(220 26% 14% / 0.04);
+    
+    /* Typography Scale */
+    --text-xs: 0.75rem;
+    --text-sm: 0.875rem;
+    --text-base: 1rem;
+    --text-lg: 1.125rem;
+    --text-xl: 1.25rem;
+    --text-2xl: 1.5rem;
+    --text-3xl: 1.875rem;
+    --text-4xl: 2.25rem;
+    --text-5xl: 3rem;
 
     --sidebar-background: 0 0% 98%;
 
@@ -100,6 +120,83 @@ All colors MUST be HSL.
   }
 
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground font-sans antialiased;
+  }
+}
+
+@layer components {
+  /* Hero Button Variants */
+  .btn-hero {
+    @apply bg-gradient-to-r from-secondary to-secondary/90 text-secondary-foreground 
+           px-8 py-4 rounded-lg font-semibold text-lg shadow-lg 
+           hover:shadow-xl hover:scale-105 transition-all duration-300;
+  }
+  
+  .btn-outline {
+    @apply border-2 border-secondary text-secondary bg-transparent 
+           px-6 py-3 rounded-lg font-semibold 
+           hover:bg-secondary hover:text-secondary-foreground 
+           transition-all duration-300;
+  }
+  
+  /* Section Styling */
+  .section-container {
+    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-24;
+  }
+  
+  /* 80/20 Progress Bar */
+  .progress-80-20 {
+    @apply w-full h-2 bg-accent rounded-full overflow-hidden relative;
+  }
+  
+  .progress-80-20::after {
+    content: '';
+    @apply absolute left-0 top-0 h-full w-4/5 bg-primary rounded-full;
+  }
+  
+  .progress-80-20::before {
+    content: '';
+    @apply absolute right-0 top-0 h-full w-1/5 bg-secondary rounded-full;
+  }
+  
+  /* Card Shadows */
+  .card-shadow {
+    box-shadow: var(--shadow-card);
+  }
+  
+  .hero-shadow {
+    box-shadow: var(--shadow-hero);
+  }
+  
+  /* Typography Classes */
+  .heading-xl {
+    @apply text-4xl lg:text-5xl xl:text-6xl font-bold leading-tight;
+  }
+  
+  .heading-lg {
+    @apply text-3xl lg:text-4xl font-bold leading-tight;
+  }
+  
+  .heading-md {
+    @apply text-2xl lg:text-3xl font-bold leading-tight;
+  }
+  
+  .text-large {
+    @apply text-lg lg:text-xl leading-relaxed;
+  }
+}
+
+@layer utilities {
+  /* Gradient utilities */
+  .bg-gradient-hero {
+    background: var(--gradient-hero);
+  }
+  
+  .bg-gradient-accent {
+    background: var(--gradient-accent);
+  }
+  
+  .bg-gradient-split {
+    background: var(--gradient-split);
   }
 }
